@@ -320,19 +320,8 @@ namespace CNTK
             return keys;
         }
 
-        template <typename KeyType, typename ValueType>
-        _SimpleVector<ValueType> _SimpleMap<KeyType, ValueType>::Values() const
-        {
-            _SimpleVector<ValueType> values;
-            for (auto iter = m_map->begin(); iter != m_map->end(); ++iter)
-                values.PushBack(iter->second);
-
-            return values;
-        }
-
         // Explicit template instantiations
         template class _SimpleMap<Variable, ValuePtr>;
-        // TODO: g++ (4.8.4) complains about const values being stored in an std::vector
         template class _SimpleMap<Variable, const ValuePtr>;
         template class _SimpleMap<Placeholder, Variable>;
         template class _SimpleMap<Variable, double>;

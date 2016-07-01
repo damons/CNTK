@@ -192,12 +192,10 @@ LearnerBase::LearnerBase(const _SimpleSet<Variable>& parameters, const Learner::
 
 /* virtual */ void LearnerBase::ResetSmoothedGradients() /* override */
 {
-    auto gradientVector = m_smoothedGradients.Values();
-
-    for (auto i = 0; i < gradientVector.Size(); ++i)
+    for (const auto& learnableParameter : Parameters())
     {
-        auto data = gradientVector[i]->Data();
-
+        auto& smoothedGradient = m_smoothedGradients[learnableParameter];
+        auto data = smoothedGradient->Data();
         switch (data->GetDataType())
         {
         case DataType::Float:
